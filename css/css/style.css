@@ -19,7 +19,7 @@ body {
 .navbar_box_one {
   background: url(../../images/Navbar_box_one.png);
   background-repeat: no-repeat;
-  width: 65.5%;
+  width: 70%;
   height: 580px;
   z-index: 9 !important;
   margin-left: 35%;
