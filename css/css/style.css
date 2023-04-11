@@ -19,7 +19,7 @@ body {
 .navbar_box_one {
   background: url(../../images/Navbar_box_one.png);
   background-repeat: no-repeat;
-  width: 70%;
+  width: 65.5%;
   height: 580px;
   z-index: 9 !important;
   margin-left: 35%;
@@ -33,6 +33,7 @@ body {
 
 #firstPage {
   width: 100%;
+  background-color:   #2F2E2E;
 }
 #logo-img {
   background: url(../../images/chefyinyeresize.png);
