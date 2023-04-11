@@ -599,7 +599,7 @@ button > a {
     width: 70%;
     margin: auto;
     line-height: 0.7;
-    padding-top: 30%;
+    padding-top: 20%;
   }
   #textBox > p:nth-child(1) {
     font-family: Lobster;
@@ -647,5 +647,54 @@ button > a {
     text-decoration: none;
     color: black;
     font-weight:400;
+  }
+  #carouselContainer > p:nth-child(1) {
+    color: #f8bc01;
+    font-family: lobster;
+    text-align: center;
+    font-size: 400%;
+  }
+  #carouselContainer > p:nth-child(2) {
+    color: black;
+    font-family: proza libre;
+    text-align: center;
+    font-size: 200%;
+  }
+  #subscribeBox {
+    text-align: center;
+  }
+  #subscribeBox > h4 {
+    font-family: lobster;
+    font-size: medium;
+  }
+  #subscribeBox > p {
+    font-family: proza libre;
+    font-size: small;
+  }
+  #email {
+    width: 35%;
+    height: 20px;
+  }
+  #chooseUsTab {
+    background-color: black;
+    text-align: center;
+  }
+  #chooseUsTab > p:nth-child(1) {
+    color: #f8bc01;
+    font-family: lobster;
+    font-size: 250%;
+  }
+  
+  #chooseUsTab > p:nth-child(2) {
+    color: white;
+    font-family: Proza Libre;
+    width: 60%;
+    margin: auto;
+    font-size: 100%;
+  }
+  #chooseUsTab > button {
+    width: 100px;
+    margin-bottom: 20px;
+    margin-top: 20px;
   }
 }
