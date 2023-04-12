@@ -652,13 +652,13 @@ button > a {
     color: #f8bc01;
     font-family: lobster;
     text-align: center;
-    font-size: 400%;
+    font-size: 250%;
   }
   #carouselContainer > p:nth-child(2) {
     color: black;
     font-family: proza libre;
     text-align: center;
-    font-size: 200%;
+    font-size: 100%;
   }
   #subscribeBox {
     text-align: center;
