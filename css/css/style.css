@@ -697,4 +697,8 @@ button > a {
     margin-bottom: 20px;
     margin-top: 20px;
   }
+  .navbar-nav {
+    margin-left: 60%;
+    position: absolute;
+  }
 }
