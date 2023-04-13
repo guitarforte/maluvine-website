@@ -357,20 +357,25 @@ button > a {
 /********** Small devices only **********/
 @media (min-width: 768px) and (max-width: 991px) {
   .navbar-brand {
-    background: url(../../images/Navbarimage.png);
-    background-repeat: no-repeat;
-    width: 60%;
-
-    top: 0;
-    left: 0;
+    background: url(../../images/jollof-rice.jpg);
+  background-repeat: no-repeat;
+  width: 60%;
+  height: 100%;
+  background-size: cover;
+	background-position: center;  
+  top: 0;
+  left: 0;
   }
   .navbar_box_one {
+
     background: url(../../images/Navbar_box_one.png);
     background-repeat: no-repeat;
     width: 65.5%;
-
+    height: 500px;
     z-index: 9 !important;
     margin-left: 35%;
+    background-size: cover;
+    background-position: center; 
   }
   .navbar-toggler {
     margin-left: 77% !important;
@@ -462,20 +467,26 @@ button > a {
 @media (min-width: 560px) and (max-width: 767px) {
   /* column two */
   .navbar-brand {
-    background: url(../../images/Navbarimage.png);
-    background-repeat: no-repeat;
-    width: 75%;
-
-    top: 0;
-    left: 0;
+    background: url(../../images/jollof-rice.jpg);
+  background-repeat: no-repeat;
+  width: 75%;
+  height: 100%;
+  background-size: cover;
+	background-position: center;  
+  top: 0;
+  left: 0;
   }
   .navbar_box_one {
+
     background: url(../../images/Navbar_box_one.png);
     background-repeat: no-repeat;
     width: 65.5%;
-
+    height: 500px;
     z-index: 9 !important;
     margin-left: 35%;
+    background-size: cover;
+    background-position: center; 
+    
   }
   .navbar-toggler {
     margin-left: 77% !important;
@@ -566,20 +577,24 @@ button > a {
 /********** Extra Extra small devices only **********/
 @media (max-width: 560px) {
   .navbar-brand {
-    background: url(../../images/Navbarimage.png);
-    background-repeat: no-repeat;
-    width: 80%;
-
-    top: 0;
-    left: 0;
+    background: url(../../images/jollof-rice.jpg);
+  background-repeat: no-repeat;
+  width: 80%;
+  height: 100%;
+  background-size: cover;
+	background-position: center;  
+  top: 0;
+  left: 0;
   }
   .navbar_box_one {
-    background: url(../../images/Navbar_box_one.png);
-    background-repeat: no-repeat;
-    width: 65.5%;
-
-    z-index: 9 !important;
-    margin-left: 35%;
+     background: url(../../images/Navbar_box_one.png);
+  background-repeat: no-repeat;
+  width: 65.5%;
+  height: 500px;
+  z-index: 9 !important;
+  margin-left: 35%;
+  background-size: cover;
+	background-position: center; 
   }
   .navbar-toggler {
     margin-left: 77% !important;
