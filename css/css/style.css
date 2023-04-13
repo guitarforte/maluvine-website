@@ -9,10 +9,12 @@ body {
 }
 
 .navbar-brand {
-  background: url(../../images/Navbarimage.png);
+  background: url(../../images/jollof-rice.jpg);
   background-repeat: no-repeat;
   width: 60%;
-  height: 580px;
+  height: 100%;
+  background-size: cover;
+	background-position: center;  
   top: 0;
   left: 0;
 }
@@ -20,9 +22,11 @@ body {
   background: url(../../images/Navbar_box_one.png);
   background-repeat: no-repeat;
   width: 65.5%;
-  height: 580px;
+  height: 500px;
   z-index: 9 !important;
   margin-left: 35%;
+  background-size: cover;
+	background-position: center; 
 }
 .navbar-toggler {
   margin-left: 70% !important;
