@@ -14,3 +14,24 @@ productContainers.forEach((item, i) => {
         item.scrollLeft -= containerWidth;
     })
 })
+
+$(function () {
+    
+    $("#navbarToggle").blur(function (event) {
+        var screenWidth= window.innerWidth;
+        if (screenWidth <768) {
+            $("navbarNavAltMarkup").collapse('hide');
+        }
+    });
+});
+
+
+function popUp() {
+    var txt;
+    if (confirm("Payment validate pre-order")) {
+      txt = " Payment validate order: Call +234810529895 to make your payment";
+    } else {
+      txt = "You pressed Cancel!";
+    }
+    document.getElementById("demo").innerHTML = txt;
+  }
