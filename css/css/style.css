@@ -9,7 +9,7 @@ body {
 }
 
 .navbar-brand {
-  background: url(../../images/jollof-rice.json);
+  background: url(../../images/jollof-rice.jpg);
   background-repeat: no-repeat;
   width: 60%;
   height: 100%;
@@ -381,7 +381,7 @@ button > a {
 /********** Small devices only **********/
 @media (min-width: 768px) and (max-width: 991px) {
   .navbar-brand {
-    background: url(../../images/jollof-rice.json);
+    background: url(../../images/jollof-rice.jpg);
   background-repeat: no-repeat;
   width: 60%;
   height: 100%;
@@ -491,7 +491,7 @@ button > a {
 @media (min-width: 560px) and (max-width: 767px) {
   /* column two */
   .navbar-brand {
-    background: url(../../images/jollof-rice.json);
+    background: url(../../images/jollof-rice.jpg);
   background-repeat: no-repeat;
   width: 75%;
   height: 100%;
@@ -601,7 +601,7 @@ button > a {
 /********** Extra Extra small devices only **********/
 @media (max-width: 560px) {
   .navbar-brand {
-    background: url(../../images/jollof-rice.json);
+    background: url(../../images/jollof-rice.jpg);
   background-repeat: no-repeat;
   width: 80%;
   height: 100%;
