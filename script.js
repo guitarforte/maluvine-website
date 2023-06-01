@@ -161,7 +161,6 @@ function deletedata (id) {
   // datadelete.splice(1,1)
 
   const cartProducts = getCartFromLocalStorage()
-
   const updatedCart = cartProducts.filter(product => product.id !== id)
 
 
@@ -182,6 +181,7 @@ function displaycart(  ) {
   const productsWarapper = document.querySelector("#tablehtml");
 
   const cartProducts = getCartFromLocalStorage();
+  
   productsWarapper.innerHTML = cartProducts
     .map(
       (product) =>{
@@ -211,7 +211,7 @@ function displaycart(  ) {
 
 const getCartFromLocalStorage = ()=>{
   const localStorageCartProducts = localStorage.getItem(LOCAL_STORAGE_KEY)
-
+  
   const cartProducts = localStorageCartProducts === undefined || localStorageCartProducts === null ? [] : JSON.parse(localStorageCartProducts)
 
   return cartProducts
@@ -233,10 +233,13 @@ console.log( updatedCart);
 
 }
 
-const displayTotal = () => {
-  cartItems = getCartFromLocalStorage()
- const display
-}
+
 
 // Sub total javascript
- 
+  const cartTotalorder = getCartFromLocalStorage();
+  let totalPrice = 0;
+  cartTotalorder.forEach(item => {
+    totalPrice = totalPrice + item.quantity*item.price
+  })
+document.getElementById("displaytotal").innerHTML = totalPrice;
+
