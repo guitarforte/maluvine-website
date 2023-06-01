@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Shop now</title>
+         <!-- Cool Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+        <!-- Our stylesheet -->
+        <link rel="stylesheet" type="text/css" href="customisecss/Signup.css">
+    </head>
+    <body>
+        <div id="content_container">
+            <div id="form_container">
+                <div id="form_header_container">
+                    <h2 id="form_header"> Login </h2>
+                </div>
+
+                <div id="form_content_container">
+                    <div id="form_content_inner_container">
+                        <input type="text" id="full_name" placeholder="Full name">
+                        <input type="text" id="username" placeholder="Username">
+                        <input type="email" id="email" placeholder="Email">
+                        <input type="password" id="password" placeholder="New Password">
+                        <div id="button_container">
+                            <button id="loginNow">Login</button>
+                            <button id="registerButton">Register</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+        import { getAuth,
+             createUserWithEmailAndPassword,
+             signInWithEmailAndPassword,
+             signOut,
+             onAuthStateChanged
+             } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDGVub11l4ow3NCVWmNlf0PJ-TfMoDcRds",
+            authDomain: "marve-forte.firebaseapp.com",
+            databaseURL: "https://marve-forte-default-rtdb.firebaseio.com",
+            projectId: "marve-forte",
+            storageBucket: "marve-forte.appspot.com",
+            messagingSenderId: "776770718954",
+            appId: "1:776770718954:web:10fd8bd71a9f3e2182db93",
+            measurementId: "G-RS75DBSW05"
+          };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+   const auth = getAuth(app)
+  
+  // Initialize variables
+ 
+  const full_name = document.getElementById('full_name').value;
+  const username = document.getElementById('username').value;
+  const signUpButton = document.getElementById('registerButton');
+  const loginButton = document.getElementById('loginNow')
+  
+  // Set up our register function
+ 
+    const usersignUp = async => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const full_name = document.getElementById('full_name').value;
+        const username = document.getElementById('username').value;
+        
+         // Move on with Auth
+    createUserWithEmailAndPassword(auth, email, password, full_name,username)
+    .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("user")
+        alert("users successfully created")
+    })
+    .catch((error) => {
+      // Firebase will use this to alert of its errors
+      var error_code = error.code;
+      var error_message = error.message;
+  
+      alert(error_message + error_message)
+    })
+  }
+    signUpButton.addEventListener('click' , usersignUp )
+ 
+  
+  // Set up our login function
+   const usersignIn = async => {
+    // Get all our input fields
+    var email = document.getElementById('email').value;
+    var  password = document.getElementById('password').value;
+     //moving on to auth
+     signInWithEmailAndPassword ( auth, email , password)
+     .then ((userCredential) => {
+        const user = userCredential.user.email;
+        alert("welcome" + user)
+     }).catch((error) => {
+       var error_code = error.code;
+       var error_message = error.message;
+       alert(error_code + error_message)
+     }
+     )
+  }
+
+  
+  loginButton.addEventListener('click', usersignIn)
+  
+  
+
+      </script>
+
+    <!-- Our script must be loaded after firebase references -->
+    <script src="signup.js"></script>
+
+</html>
