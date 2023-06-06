@@ -127,8 +127,9 @@ function makePayment() {
         phone_number: document.getElementById('userPhone_number').value,
         name: document.getElementById('Full_Name').value,
       },
-      callback: function(data){
-        console.log(data)
+      callback: function(payment) {
+        
+        console.log(payment.id);
       },
       customizations: {
         title: "The Titanic Store",

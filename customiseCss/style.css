@@ -11,7 +11,9 @@ html {
 }
 
 /* Global Styles */
-
+#close {
+  display: none;
+}
 h1 {
   font-size: 50px;
   line-height: 64px;
@@ -106,9 +108,7 @@ a {
   bottom: -4px;
 }
 
-#close {
-display: none;
-}
+
 /* hero */
  #hero {
   width: 100%;
@@ -408,6 +408,7 @@ margin-bottom: 0px !important;
     color : #1a1a1a;
   }
   #close {
+    display: block;
     position: absolute;
     top: 30px;
     left: 30px;
@@ -890,6 +891,7 @@ font-size: 14px;
   #cart-add {
     padding: 10px 10px;
   }
+ 
 }
 
 
