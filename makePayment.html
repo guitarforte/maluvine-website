@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ShopNow</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/css/bootstrap.css" />
+    <link rel="stylesheet" href="customiseCss/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Proza+Libre:wght@500&display=swap" rel="stylesheet">
+    <style type="text/css"></style>
+  </head>
+  <body>
+   <div class="row container ">
+    <div class="container d-flex justify-content-center align-items-center col-6 wrapperPay">
+      <main class="paymentdetailswrapper d-flex justify-content-center m-auto">
+        <div >
+          <img src="images/kase1.png" width="50px">
+          <span class="totalamtPayable" id="displayTotalpayable">     </span>  
+        </div>
+        <div>
+      <p class="pb-6">How will you love to receive your order? </p>
+      <form action="" method="POST" class="signupBox">
+  <label class="makepaymentLabel pb-1" id="Full_Name"> Full_name </label> <br>
+  <input class="makePaymentinput" type="text" placeholder="" > <br>
+  <label  class="makepaymentLabel pt-4 pb-1" id="userPhone_number"> Phone_number </label><br>
+  <input  class="makePaymentinput" type="number" placeholder="" required> <br>
+  <label  class="makepaymentLabel pt-4 pb-1" id="amount"> Address </label><br>
+  <input  class="makePaymentinput" type="text" placeholder="Enter Address"  required> <br>
+  <label  class="makepaymentLabel pt-4 pb-1"> Email </label><br>
+  <input  class="makePaymentinput" type="email" id="userEmail" placeholder=""> <br>
+  <br>
+  <div class="d-flex justify-content-center">
+    <button type="button"  id="payNow">Continue Payment</button>
+  </div>
+</form>
+</div>
+</main>
+</div>
+<div class="col-6">
+
+</div>  
+</div>  
+<script src="script.js">
+</script>
+<script src="signup.js">   
+</script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+  import { collection,
+          getFirestore,
+          getDocs,
+          addDoc,
+          setDoc,
+          doc,
+          getDoc
+          } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+ 
+
+// Initialize variables
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const colRef = collection(db , 'orders' );
+
+//Add cart document to firebase 
+const addToFirebase = document.getElementById('payNow')
+
+
+async function sendtofire ()   {
+  
+  const cartInformation = getCartFromLocalStorage();
+  const cartOrders = cartInformation.map((item )=> {
+   return   item.name
+      
+  } )
+  
+  const cartQuantity = cartInformation.map((item) => {
+   return item.quantity
+  })
+  const cartPrice = cartInformation.map((item) => {
+   return item.price
+  })
+  const totalPayable = totalCartPrice
+  const myArray =
+  {
+   title: cartOrders,
+   Price: cartPrice,
+   Quantity: cartQuantity,
+   total: totalPayable 
+  }
+  const myorders = await addDoc(colRef, myArray)
+   
+   return myorders.id 
+}
+const transaction = await sendtofire();
+console.log(totalCartPrice)
+const form = document.getElementById('payNow')
+
+function makePayment() {
+    console.log("hello")
+    FlutterwaveCheckout({
+      public_key: "FLWPUBK_TEST-dc90c98cd3bac04147109cd4f0492ed6-X",
+      tx_ref: "maluvine-" + transaction ,
+      amount: totalCartPrice,
+      currency: "NGN",
+      payment_options: "card, ussd",
+     
+      customer: {
+        email: document.getElementById('userEmail').value,
+        phone_number: document.getElementById('userPhone_number').value,
+        name: document.getElementById('Full_Name').value,
+      },
+      callback: function(data){
+        console.log(data)
+      },
+      customizations: {
+        title: "The Titanic Store",
+        description: "Payment for an awesome cruise",
+        logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+      },
+    });
+    
+  }
+
+  addToFirebase.addEventListener("click",  sendtofire);
+  form.addEventListener('click', makePayment)
+</script>
+<script>
+  document.getElementById('displayTotalpayable').innerHTML = `<p>Total:<strong> #${totalCartPrice} </strong> </p>`;
+</script>
+  <script src="makePayment.js"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+
+</html>

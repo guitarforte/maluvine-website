@@ -36,7 +36,7 @@
         </div>
     </body>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    
+    <script src="signup.js"></script>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
@@ -47,29 +47,16 @@
              signOut,
              onAuthStateChanged
              } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-      
-      
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDGVub11l4ow3NCVWmNlf0PJ-TfMoDcRds",
-            authDomain: "marve-forte.firebaseapp.com",
-            databaseURL: "https://marve-forte-default-rtdb.firebaseio.com",
-            projectId: "marve-forte",
-            storageBucket: "marve-forte.appspot.com",
-            messagingSenderId: "776770718954",
-            appId: "1:776770718954:web:10fd8bd71a9f3e2182db93",
-            measurementId: "G-RS75DBSW05"
-          };
+             import { collection,
+                getFirestore,
+                getDocs,
+                addDoc,
+                } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-   const auth = getAuth(app)
+                // Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app)
   
   // Initialize variables
  
@@ -87,7 +74,7 @@
         const username = document.getElementById('username').value;
         
          // Move on with Auth
-    createUserWithEmailAndPassword(auth, email, password, full_name,username)
+    createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         const user = userCredential.user;
         console.log("user")
@@ -125,11 +112,13 @@
   
   loginButton.addEventListener('click', usersignIn)
   
-  
+  //Add cart document to firebase 
+
+  const addToFirebase = document.getElementById('addToFirebase')
 
       </script>
 
     <!-- Our script must be loaded after firebase references -->
-    <script src="signup.js"></script>
+    
 
 </html>

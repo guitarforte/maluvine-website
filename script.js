@@ -189,7 +189,7 @@ function displaycart(  ) {
         <table id="tablehtml" width="100%">
     
         <tbody> 
-            <tr> 
+            <tr id="mouseleave"> 
                 <td><button onClick="deletedata(${product.id})" > <i  class=" far fa-times-circle"> </i> </button></td>
                 <td> <img src="${product.image}"> </img> </td>
                 <td> ${product.name} </td>
@@ -236,10 +236,15 @@ console.log( updatedCart);
 
 
 // Sub total javascript
-  const cartTotalorder = getCartFromLocalStorage();
-  let totalPrice = 0;
-  cartTotalorder.forEach(item => {
-    totalPrice = totalPrice + item.quantity*item.price
-  })
-document.getElementById("displaytotal").innerHTML = totalPrice;
+const cartTotalorder = getCartFromLocalStorage();
+ const totalCartPrice =  cartTotalorder.reduce((totalPrice, item) => {
+  let total = item.quantity 
+      return totalPrice  + item.price * total
+    }, 0)
 
+  
+  document.getElementById('displaytotal').innerHTML = totalCartPrice;
+ 
+
+
+ 
