@@ -25,25 +25,7 @@
 <link rel="stylesheet" type="text/css" href="customisecss/maluvine.css">
   </head>
   <body>
-<table>
-    <thead>
-        <tr>
-            <td> identity</td>
-            <td> orderName</td>
-            <td> Quantity</td>
-            <td> orderTotal</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td id="identity"></td>
-            <td id="names"></td>
-            <td id="quantity"></td>
-            <td id="totalPrice"></td>
-            
-        </tr>
-    </tbody>
-</table>
+    <div id="object-container"></div>
 <script src="script.js">
 </script>
 <script src="signup.js">   
@@ -71,18 +53,22 @@ const colRef = collection(db , 'orders' );
 
  
 const querySnapshot = await getDocs(collection(db, "orders"));
+const dataContainer = document.getElementById('object-container');
+
 querySnapshot.forEach((doc) => {
-    const identity = doc.id;
-    const boughtcartArray = doc.data()
-   
-     
-  // doc.data() is never undefined for query doc snapshots
-  console.log(doc.id, " => ", doc.data());
+  const identity = doc.id;
+  const boughtcartArray = doc.data();
+  const data = doc.data().Price;
+  const Price = doc.data().Price;
+  const title = doc.data().title;
+  const status = doc.data().status;
+
+  // Create a new element for each data item and append it to the container
+  const dataElement = document.createElement('p');
+  dataElement.textContent = JSON.stringify(data);
+  dataContainer.appendChild(dataElement);
 });
-console.log(totalCartPrice)
-</script>
-<script>
-  document.getElementById('displayTotalpayable').innerHTML = `<p>Total:<strong> #${totalCartPrice} </strong> </p>`;
+ 
 </script>
   <script src="makePayment.js"></script>
   <script src="https://checkout.flutterwave.com/v3.js"></script>

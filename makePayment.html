@@ -25,8 +25,8 @@
     <style type="text/css"></style>
   </head>
   <body>
-   <div class="row container ">
-    <div class="container d-flex justify-content-center align-items-center col-6 wrapperPay">
+   <div class="container ">
+    <div class="container d-flex justify-content-center align-items-center  wrapperPay">
       <main class="paymentdetailswrapper d-flex justify-content-center m-auto">
         <div >
           <img src="images/kase1.png" width="50px">
@@ -36,11 +36,11 @@
       <p class="pb-6">How will you love to receive your order? </p>
       <form action="" method="POST" class="signupBox">
   <label class="makepaymentLabel pb-1" id="Full_Name"> Full_name </label> <br>
-  <input class="makePaymentinput" type="text" placeholder="" > <br>
+  <input class="makePaymentinput" type="text" placeholder="" id="fullname" > <br>
   <label  class="makepaymentLabel pt-4 pb-1" id="userPhone_number"> Phone_number </label><br>
-  <input  class="makePaymentinput" type="number" placeholder="" required> <br>
-  <label  class="makepaymentLabel pt-4 pb-1" id="amount"> Address </label><br>
-  <input  class="makePaymentinput" type="text" placeholder="Enter Address"  required> <br>
+  <input  class="makePaymentinput" type="number" placeholder="" id="number" required> <br>
+  <label  class="makepaymentLabel pt-4 pb-1" id="address"> Address </label><br>
+  <input  class="makePaymentinput" type="text" placeholder="Enter Address" id="enteraddress" required> <br>
   <label  class="makepaymentLabel pt-4 pb-1"> Email </label><br>
   <input  class="makePaymentinput" type="email" id="userEmail" placeholder=""> <br>
   <br>
@@ -51,9 +51,7 @@
 </div>
 </main>
 </div>
-<div class="col-6">
-
-</div>  
+  
 </div>  
 <script src="script.js">
 </script>
@@ -76,10 +74,10 @@
 // Initialize variables
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
+   
 const colRef = collection(db , 'orders' );
-
 //Add cart document to firebase 
+const form = document.getElementById('payNow')
 const addToFirebase = document.getElementById('payNow')
 
 
@@ -87,6 +85,7 @@ async function sendtofire ()   {
   
   const cartInformation = getCartFromLocalStorage();
   const cartOrders = cartInformation.map((item )=> {
+    
    return   item.name
       
   } )
@@ -105,31 +104,42 @@ async function sendtofire ()   {
    Quantity: cartQuantity,
    total: totalPayable 
   }
+
   const myorders = await addDoc(colRef, myArray)
+
    
-   return myorders.id 
+   return myorders.id
 }
 const transaction = await sendtofire();
-console.log(totalCartPrice)
-const form = document.getElementById('payNow')
-
+let flutterTransactionReference;
 function makePayment() {
-    console.log("hello")
     FlutterwaveCheckout({
-      public_key: "FLWPUBK_TEST-dc90c98cd3bac04147109cd4f0492ed6-X",
-      tx_ref: "maluvine-" + transaction ,
+      public_key: "FLWPUBK_TEST-07e42b921bd2a1b959535d8d7ff646e5-X",
+      tx_ref:  transaction ,
       amount: totalCartPrice,
       currency: "NGN",
       payment_options: "card, ussd",
      
       customer: {
         email: document.getElementById('userEmail').value,
-        phone_number: document.getElementById('userPhone_number').value,
+        phonenumber: document.getElementById('number').value,
         name: document.getElementById('Full_Name').value,
+        address: document.getElementById('address').value
       },
-      callback: function(payment) {
-        
-        console.log(payment.id);
+      callback: function(data) {
+        const reference = data.tx_ref;
+        processTransaction(reference);
+        console.log("Transaction reference inside makePayment callback:", flutterTransactionReference);
+       
+        if (transaction === flutterTransactionReference) {
+           const flutterUpdate = doc(db, 'orders', transaction);
+           setDoc(flutterUpdate, { status: true,
+                                    name:document.getElementById('fullname').value,
+                                    email: document.getElementById('userEmail').value,
+                                        Phone_number: document.getElementById('number').value,
+                                      Address :document.getElementById('enteraddress').value,
+                                    } , { merge: true}) ;
+          console.log("Transaction references are equal"); }
       },
       customizations: {
         title: "The Titanic Store",
@@ -137,8 +147,16 @@ function makePayment() {
         logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
       },
     });
-    
   }
+
+  function processTransaction(transactionReference) {
+    flutterTransactionReference = transactionReference; // Store the Flutterwave transaction reference in the global variable
+    console.log("Transaction reference:", flutterTransactionReference);
+  }
+  
+  console.log(transaction);
+  console.log("Transaction reference outside makePayment:", flutterTransactionReference);
+ 
 
   addToFirebase.addEventListener("click",  sendtofire);
   form.addEventListener('click', makePayment)

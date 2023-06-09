@@ -128,7 +128,7 @@ function loadProducts() {
     <div>
       <img class="w-100 product-image" src="${product.image}"> </img>
       <div class="description">
-        <span>${product.name}</span>
+        <span >${product.name}</span>
         <h5>${product.description}</h5>
         <div class="star"> 
           <i class="fas fa-star "> </i>
@@ -139,7 +139,7 @@ function loadProducts() {
         </div>
         <h4> #${product.price} </h4>
       </div>
-      ${!cartProducts.some((_product)=> _product.id === product.id) ? `<button class="cart" onClick="addProductToCart(${product.id})" > <i class="fal fa-shopping-cart"> </i> </button>` : '<a href="/cart.html">View cart</a>'}
+      ${!cartProducts.some((_product)=> _product.id === product.id) ? `<button class="cart"  onClick="addProductToCart(${product.id})" > <i class="fal fa-shopping-cart"> </i> </button>` : '<a href="/cart.html">View cart</a>'}
     </div>
   </div>
     `
@@ -203,6 +203,15 @@ function displaycart(  ) {
       }
     )
     .join("");
+
+    const totalCartPrice = cartProducts.reduce((prev, current)=> {
+      console.log(prev);
+     return prev + (current.price * (current.quantity ?? 1))
+    }, 0)
+
+    console.log(totalCartPrice);
+
+    document.getElementById("displaytotal").innerText = totalCartPrice
    
 }
 
@@ -228,22 +237,13 @@ const updateCartItem = (id, field, value)=>{
   })
 
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedCart))
-console.log( updatedCart);
   displaycart()
 
 }
 
 
 
-// Sub total javascript
-const cartTotalorder = getCartFromLocalStorage();
- const totalCartPrice =  cartTotalorder.reduce((totalPrice, item) => {
-  let total = item.quantity 
-      return totalPrice  + item.price * total
-    }, 0)
 
-  
-  document.getElementById('displaytotal').innerHTML = totalCartPrice;
  
 
 
